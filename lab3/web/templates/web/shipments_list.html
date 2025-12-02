@@ -1,0 +1,12 @@
+<h1>Shipments</h1>
+<ul>
+{% for s in shipments %}
+    <li>
+        <a href="{% url 'shipment_detail' s.id %}">
+            Shipment #{{ s.id }} – {{ s.status }} – {{ s.price }} грн
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'shipment_create' %}">Add Shipment</a>

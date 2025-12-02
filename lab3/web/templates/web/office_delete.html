@@ -1,0 +1,8 @@
+<h1>Delete {{ office.city }}?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+<a href="{% url 'office_detail' office.id %}">Cancel</a>

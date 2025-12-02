@@ -1,0 +1,8 @@
+<h1>Client details</h1>
+
+<p><strong>Name:</strong> {{ client.first_name }} {{ client.last_name }}</p>
+<p><strong>Phone:</strong> {{ client.phone }}</p>
+
+<a href="{% url 'client_edit' client.id %}">✏ Edit</a><br>
+<a href="{% url 'client_delete' client.id %}">🗑 Delete</a><br>
+<a href="{% url 'clients_list' %}">⬅ Back</a>

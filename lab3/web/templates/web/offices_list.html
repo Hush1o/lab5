@@ -1,0 +1,12 @@
+<h1>Offices</h1>
+<ul>
+{% for o in offices %}
+    <li>
+        <a href="{% url 'office_detail' o.id %}">
+            {{ o.city }} – {{ o.address }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'office_create' %}">Add Office</a>

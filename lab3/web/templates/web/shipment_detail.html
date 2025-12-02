@@ -1,0 +1,9 @@
+<h1>Shipment #{{ shipment.id }}</h1>
+
+<p>Client: {{ shipment.client }}</p>
+<p>Status: {{ shipment.status }}</p>
+<p>Price: {{ shipment.price }}</p>
+
+<a href="{% url 'shipment_edit' shipment.id %}">Edit</a>
+<a href="{% url 'shipment_delete' shipment.id %}">Delete</a>
+<a href="{% url 'shipments_list' %}">Back</a>

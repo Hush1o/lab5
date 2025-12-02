@@ -1,0 +1,6 @@
+<h1>{{ office.city }}</h1>
+<p>Address: {{ office.address }}</p>
+
+<a href="{% url 'office_edit' office.id %}">Edit</a>
+<a href="{% url 'office_delete' office.id %}">Delete</a>
+<a href="{% url 'offices_list' %}">Back</a>
