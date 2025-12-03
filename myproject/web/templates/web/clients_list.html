@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Список Клієнтів</title>
+    <style>
+        /* 1. ФОН І ЦЕНТРУВАННЯ */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fffbf0; /* Дуже світлий теплий фон сторінки */
+            display: flex;             /* Вмикаємо режим гнучкого макету */
+            flex-direction: column;    /* Елементи йдуть зверху вниз */
+            align-items: center;       /* <--- ЦЕ ЦЕНТРУЄ ТАБЛИЦЮ ПО ГОРИЗОНТАЛІ */
+            padding: 30px;
+            margin: 0;
+        }
+
+        h1 { color: #5a4a00; /* Темно-жовтий заголовок */ }
+
+        /* Кнопка "Додати" */
+        .btn-add {
+            background-color: #f1c40f; /* Яскраво-жовта кнопка */
+            color: #333;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 20px;       /* Закруглена кнопка */
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .btn-add:hover {
+            background-color: #d4ac0d; /* Темніша при наведенні */
+            transform: translateY(-2px);
+        }
+
+        /* 2. ТАБЛИЦЯ */
+        table {
+            width: 85%;                /* Ширина таблиці */
+            max-width: 1000px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15); /* Жовтувата тінь */
+            border-radius: 12px;       /* Сильніше закруглення кутів */
+            overflow: hidden;
+            border: 1px solid #fae588; /* Тонка жовта рамка */
+        }
+
+        /* ШАПКА ТАБЛИЦІ (ТУТ МІНЯЄМО КОЛІР) */
+        th {
+            background-color: #FFD700; /* <--- ЗОЛОТИЙ КОЛІР ШАПКИ */
+            color: #444;               /* Темний текст */
+            padding: 18px;
+            text-align: left;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #f9e79f; /* Світло-жовті лінії */
+            color: #555;
+        }
+
+        /* Ніжно-жовта "зебра" */
+        tr:nth-child(even) {
+            background-color: #fffde7; /* <--- СВІТЛО-ЖОВТИЙ РЯДОК */
+        }
+
+        /* Ефект при наведенні */
+        tr:hover {
+            background-color: #fff59d; /* Більш насичений жовтий при наведенні */
+        }
+
+        /* 3. ПОСИЛАННЯ ТА КНОПКИ */
+        a { text-decoration: none; color: #333; }
+
+        .name-link {
+            color: #d35400; /* Помаранчевий колір імені */
+            font-weight: bold;
+        }
+
+        .actions { white-space: nowrap; } /* Щоб кнопки не переносились */
+
+        .btn-action {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .edit { background-color: #ffe082; color: #5d4037; } /* Жовтувата кнопка Edit */
+        .delete {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .delete:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <h1> Клієнти </h1>
+
+    <a href="{% url 'client_create' %}" class="btn-add">➕ Новий клієнт</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Телефон</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>
+                    <a href="{% url 'client_detail' client.pk %}" class="name-link">
+                        {{ client.first_name }}
+                    </a>
+                </td>
+                <td>{{ client.last_name }}</td>
+                <td>{{ client.phone }}</td>
+                <td class="actions">
+                    <a href="{% url 'client_edit' client.pk %}" class="btn-action edit">✏️ Edit</a>
+
+                    <form action="{% url 'client_delete' client.pk %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete" onclick="return confirm('Видалити?')">❌ Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align:center; padding: 20px;">
+                    Тут поки що пусто 🌻
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

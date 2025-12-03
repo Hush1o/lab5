@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'lab3.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shipping_db',
+        'NAME': 'Vlad_bd',
         'USER': 'root',
-        'PASSWORD': '7VBNMq525',
-        'HOST': 'localhost',
+        'PASSWORD': 'Q09liashchuk',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
